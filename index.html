@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Bara Tehni (12 Beads), originally developed in C++ and recreated as a playable browser game using HTML, CSS, and JavaScript."
+  >
+  <title>Bara Tehni (12 Beads) | Faizan Muhammad</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#game" aria-label="Bara Tehni home">
+        <strong>Bara Tehni (12 Beads)</strong>
+        <span>C++ Coursework Project · 2025</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="active" href="#game">Game</a>
+        <a href="#about">About</a>
+        <a href="#how-to-play">How to Play</a>
+        <a href="#repository">Repository</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section id="game" class="game-layout" aria-labelledby="game-title">
+      <h1 id="game-title" class="sr-only">Play Bara Tehni</h1>
+
+      <aside class="sidebar">
+        <section class="panel setup-panel" aria-labelledby="setup-title">
+          <h2 id="setup-title">Game Setup</h2>
+
+          <form id="setup-form" novalidate>
+            <label for="player-one-name">Player 1 name</label>
+            <input
+              id="player-one-name"
+              name="playerOneName"
+              type="text"
+              maxlength="30"
+              value="Player 1"
+              autocomplete="off"
+            >
+
+            <label for="game-mode">Game mode</label>
+            <select id="game-mode" name="gameMode">
+              <option value="computer">Player vs Computer</option>
+              <option value="two-player">Two Players</option>
+            </select>
+
+            <div id="player-two-field" hidden>
+              <label for="player-two-name">Player 2 name</label>
+              <input
+                id="player-two-name"
+                name="playerTwoName"
+                type="text"
+                maxlength="30"
+                value="Player 2"
+                autocomplete="off"
+              >
+            </div>
+
+            <fieldset>
+              <legend>Coin toss choice</legend>
+              <div class="choice-row">
+                <label class="radio-option">
+                  <input type="radio" name="coinChoice" value="heads" checked>
+                  <span>Heads</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="coinChoice" value="tails">
+                  <span>Tails</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <button class="primary-button" type="submit">Start New Game</button>
+          </form>
+
+          <div class="action-grid" aria-label="Game actions">
+            <button id="save-button" type="button">Save</button>
+            <button id="load-button" type="button">Load</button>
+            <button id="undo-button" type="button">Undo</button>
+            <button id="redo-button" type="button">Redo</button>
+            <button id="reset-button" class="wide-button" type="button">Reset Board</button>
+          </div>
+        </section>
+
+        <section class="panel info-panel" aria-labelledby="game-info-title">
+          <h2 id="game-info-title">Game Info</h2>
+
+          <div class="player-row player-one-row">
+            <span class="mini-piece x-piece" aria-hidden="true">X</span>
+            <div>
+              <strong id="player-one-label">Player 1</strong>
+              <span><b id="player-one-count">12</b> beads remaining</span>
+            </div>
+          </div>
+
+          <div class="player-row player-two-row">
+            <span class="mini-piece o-piece" aria-hidden="true">O</span>
+            <div>
+              <strong id="player-two-label">Computer</strong>
+              <span><b id="player-two-count">12</b> beads remaining</span>
+            </div>
+          </div>
+
+          <dl class="game-meta">
+            <div>
+              <dt>Coin</dt>
+              <dd id="coin-result">Not tossed</dd>
+            </div>
+            <div>
+              <dt>Objective</dt>
+              <dd>Capture all opposing beads or leave the opponent without a valid move.</dd>
+            </div>
+          </dl>
+        </section>
+      </aside>
+
+      <div class="game-column">
+        <section class="panel board-panel" aria-labelledby="board-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Interactive browser recreation</p>
+              <h2 id="board-title">Game Board</h2>
+            </div>
+            <span id="turn-pill" class="turn-pill">Start a game</span>
+          </div>
+
+          <div class="score-strip" aria-label="Current score">
+            <div>
+              <span id="score-player-one-name">Player 1</span>
+              <strong id="score-player-one">12</strong>
+            </div>
+            <p>Beads remaining</p>
+            <div>
+              <span id="score-player-two-name">Computer</span>
+              <strong id="score-player-two">12</strong>
+            </div>
+          </div>
+
+          <div class="board-frame">
+            <div
+              id="board"
+              class="board"
+              role="grid"
+              aria-label="Five by five Bara Tehni board"
+            ></div>
+          </div>
+
+          <div class="move-area">
+            <p id="move-message" class="move-message" role="status" aria-live="polite">
+              Configure the players and start a new game.
+            </p>
+            <p class="move-help">
+              Select one of your beads, then select an empty adjacent square or a valid capture square.
+            </p>
+          </div>
+        </section>
+
+        <section class="panel log-panel" aria-labelledby="log-title">
+          <div class="panel-heading compact-heading">
+            <h2 id="log-title">Game Log</h2>
+            <button id="clear-log-button" class="text-button" type="button">Clear Log</button>
+          </div>
+          <ol id="game-log" class="game-log" aria-live="polite"></ol>
+        </section>
+      </div>
+    </section>
+
+    <section id="about" class="content-section">
+      <p class="eyebrow">About this project</p>
+      <h2>Original C++ logic, recreated for the browser.</h2>
+      <div class="content-grid">
+        <p>
+          Bara Tehni is a two-player strategy board game played on a fixed 5×5 board.
+          This version preserves the coursework rules, board setup, movement, captures,
+          bead counts, computer opponent, save/load flow, and undo/redo controls.
+        </p>
+        <p>
+          The original implementation remains available in the <code>cpp</code> folder.
+          The playable version uses only HTML, CSS, and Vanilla JavaScript, so it can be
+          deployed as a static website on Vercel.
+        </p>
+      </div>
+    </section>
+
+    <section id="how-to-play" class="content-section">
+      <p class="eyebrow">How to play</p>
+      <h2>Move carefully and capture strategically.</h2>
+      <ol class="rules-list">
+        <li>Player 1 uses X beads and Player 2 uses O beads.</li>
+        <li>A normal move travels one square in any horizontal, vertical, or diagonal direction.</li>
+        <li>A capture jumps exactly two squares over one opposing bead into an empty square.</li>
+        <li>After a capture, the same player keeps the turn when another capture is available from the landing square.</li>
+        <li>A player wins by capturing all opposing beads or leaving the opponent with no valid move.</li>
+        <li>Use Save and Load for browser storage, and Undo or Redo to move through game history.</li>
+      </ol>
+    </section>
+
+    <section id="repository" class="content-section repository-section">
+      <div>
+        <p class="eyebrow">Repository</p>
+        <h2>C++ source and web recreation in one project.</h2>
+        <p>
+          Add the final public GitHub URL in <code>script.js</code> after creating the repository.
+          The button will appear automatically.
+        </p>
+      </div>
+      <a id="repository-button" class="repository-button" href="#" target="_blank" rel="noopener noreferrer" hidden>
+        View GitHub Repository
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <strong>Bara Tehni (12 Beads)</strong>
+    <span>Original C++ coursework · Browser version built with HTML, CSS, and JavaScript</span>
+    <span>Faizan Muhammad</span>
+  </footer>
+</body>
+</html>
