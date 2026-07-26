@@ -77,3 +77,7 @@ The C++ version writes to `savegame.txt`. The browser version uses `localStorage
 ## Academic integrity note
 
 The original C++ file is preserved in the `cpp` folder. The web version is a separate interface recreation that translates the same rules and game state into browser-based interaction.
+
+## Author
+
+**Faizan Muhammad**
