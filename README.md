@@ -70,28 +70,6 @@ g++ .\cpp\Bead12.cpp -o .\BaraTehni.exe
 .\BaraTehni.exe
 ```
 
-## Deploy to Vercel
-
-1. Create a new public GitHub repository.
-2. Push this complete folder to the repository.
-3. Import the repository into Vercel.
-4. Choose **Other** as the framework preset if prompted.
-5. Keep the project root as `.`.
-6. Deploy.
-
-Because the website is static, no environment variables are required.
-
-## Add the final GitHub link
-
-After creating the repository, open `script.js` and set:
-
-```js
-const REPOSITORY_URL =
-  "https://github.com/FAIZANMUHAMMAD-311/YOUR-REPOSITORY-NAME";
-```
-
-The **View GitHub Repository** button will then appear automatically.
-
 ## Save-game behavior
 
 The C++ version writes to `savegame.txt`. The browser version uses `localStorage`, which keeps the save inside the current browser and device.
